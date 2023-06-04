@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_HealthLink.MainPage"
+             Shell.NavBarIsVisible="False" 
+             BackgroundColor="White">
+
+    <ScrollView>
+        <StackLayout VerticalOptions="Center" Margin="50, 50, 50, 50" >
+            <Image Source="image.png" WidthRequest="300" HeightRequest="300"/>
+            <Button Text="Appointments"
+            TextColor="WhiteSmoke"
+            BackgroundColor="{StaticResource HealthLink}"
+            VerticalOptions="Center"
+            Margin="50, 10, 50, 10"
+            x:Name="Appointments"
+            Clicked="Appointments_Clicked"
+             />
+
+            <Button Text="Pending Appointments"
+            TextColor="WhiteSmoke"
+            BackgroundColor="{StaticResource HealthLink}"
+            VerticalOptions="Center"
+            Margin="50, 10, 50, 10"
+            x:Name="pendingAppointments"
+            Clicked="pendingAppointments_Clicked"
+            />
+         
+        </StackLayout>
+
+
+    </ScrollView>
+
+</ContentPage>
