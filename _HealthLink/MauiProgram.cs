@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 namespace _HealthLink;
-
+using SkiaSharp.Views.Maui.Controls.Hosting;
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
@@ -8,6 +8,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

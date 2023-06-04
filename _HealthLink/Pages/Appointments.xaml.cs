@@ -6,8 +6,8 @@ public partial class AppointmentPage : ContentPage
     private Appointment apptLists = new();
 
     public AppointmentPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         appointments.ItemsSource = apptLists.GetAppointmentLists();
     }
 
@@ -24,5 +24,10 @@ public partial class AppointmentPage : ContentPage
         {
             await apptLists.DeleteAppointment();
         }
+    }
+
+    private async void add_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AddAppointmentPage());
     }
 }

@@ -102,7 +102,7 @@
                 <Button WidthRequest="70" HeightRequest="70" Text="+" BackgroundColor="#141313" TextColor="WhiteSmoke" FontSize="30" FontAttributes="Bold"
             HorizontalOptions="End" VerticalOptions="End" Margin="20" CornerRadius="100" AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
                     AbsoluteLayout.LayoutFlags="PositionProportional" 
-            FlexLayout.AlignSelf="End"/>
+            FlexLayout.AlignSelf="End" x:Name="add" Clicked="add_Clicked"/>
             </AbsoluteLayout>
         </FlexLayout>
 

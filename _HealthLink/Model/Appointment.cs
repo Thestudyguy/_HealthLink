@@ -19,6 +19,44 @@ namespace _HealthLink.Model
         public TimeOnly Time { get; set; }
         public string Department { get; set; }
 
+        public async Task<bool> AddAppointment(string fullname, string email, string department, DateTime date, TimeOnly time)
+        {
+            try
+            {
+                var evaluateEmail = (await client
+                    .Child("Appointments")
+                    .OnceAsync<Appointment>()).FirstOrDefault
+                    (a => a.Object.Email == email);
+                if (evaluateEmail == null)
+                {
+                    var appointments = new Appointment()
+                    {
+                        Fullname = fullname,
+                        Email = email,
+                        Date = date,
+                        Time = time,
+                        Department = department
+                    };
+                    await client
+                        .Child("Appointments")
+                        .PostAsync(appointments);
+                    client.Dispose();
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
+
         public ObservableCollection<Appointment> GetAppointmentLists()
         {
             var appointmentLists = client
@@ -98,7 +136,7 @@ namespace _HealthLink.Model
                     .OnceAsync<Appointment>()).FirstOrDefault
                     (a => a.Object.Email == mail);
                 if (getuserkey == null) return null;
-                date = getuserkey.Object.Date;
+                date = getuserkey.Object.Date.Date;
                 fullname = getuserkey.Object.Fullname;
                 time = getuserkey.Object.Time;
                 department = getuserkey.Object.Department;
