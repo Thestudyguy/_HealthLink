@@ -67,7 +67,7 @@
                                                    TextColor="WhiteSmoke"
                                                    FontSize="Small"
                                                    HorizontalOptions="Start" Grid.Row="2" Grid.Column="0" />
-                                                <Label Margin="10" Grid.Row="2" Grid.Column="1" Text="{Binding Date, StringFormat='{0:yyyy-MM-dd}'}"
+                                                <Label Margin="10" Grid.Row="2" Grid.Column="1" Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"
                                                    FontSize="Small"
                                                    FontAttributes="Bold" LineBreakMode="TailTruncation"
                                                    TextColor="WhiteSmoke" />

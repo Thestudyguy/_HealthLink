@@ -8,7 +8,7 @@
 
     <ScrollView>
         <StackLayout VerticalOptions="Center" Margin="50, 50, 50, 50" >
-            <skia:SKLottieView Source="asd.json" WidthRequest="300" HeightRequest="320" VerticalOptions="Center" HorizontalOptions="Center" RepeatCount="-1"/>
+            <Image Source="image.png" WidthRequest="300" HeightRequest="300"/>
             <Button Text="Appointments"
             TextColor="WhiteSmoke"
             BackgroundColor="{StaticResource HealthLink}"

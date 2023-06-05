@@ -23,11 +23,11 @@
 
                     <Label Text="Date" />
                     <DatePicker x:Name="DateDatePicker" Format="MM/dd/yyyy"/>
-
+                    
                     <Label Text="Time" />
                     <TimePicker x:Name="TimeTimePicker" Format="h:mm tt" />
 
-                    <Label Text="Department" />
+                    <Label Text="Department(Optional)" />
                     <Entry x:Name="DepartmentEntry" />
 
                     <Button Text="Add Appointment" Clicked="AddButton_Clicked" BackgroundColor="{StaticResource HealthLink}" TextColor="WhiteSmoke"/>
