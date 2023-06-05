@@ -23,10 +23,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                var evaluateEmail = (await client
-                    .Child("Appointments")
-                    .OnceAsync<Appointment>()).FirstOrDefault
-                    (a => a.Object.Email == email);
+                var evaluateEmail = (await client.Child("Appointments").OnceAsync<Appointment>()).FirstOrDefault(a => a.Object.Email == email);
                 if (evaluateEmail == null)
                 {
                     var appointments = new Appointment()
@@ -56,24 +53,17 @@ namespace _HealthLink.Model
                 return false;
             }
         }
-
         public ObservableCollection<Appointment> GetAppointmentLists()
         {
-            var appointmentLists = client
-                .Child("Appointments")
-                .AsObservable<Appointment>()
-                .AsObservableCollection();
+            var appointmentLists = client.Child("Appointments").AsObservable<Appointment>().AsObservableCollection();
             return appointmentLists;
         }
         public ObservableCollection<Appointment> GetPendingAppointmentLists()
         {
-            var PendingappointmentLists = client
-                .Child("Pending Appointments")
-                .AsObservable<Appointment>()
-                .AsObservableCollection();
+            var PendingappointmentLists = client.Child("Pending Appointments").AsObservable<Appointment>().AsObservableCollection();
             return PendingappointmentLists;
         }
-        public ObservableCollection<Appointment> GetCancelledAppointmentLists()
+     /*   public ObservableCollection<Appointment> GetCancelledAppointmentLists()
         {
             var CancelledappointmentLists = client
                 .Child("Cancelled Appointments")
@@ -81,7 +71,7 @@ namespace _HealthLink.Model
                 .AsObservableCollection();
             return CancelledappointmentLists;
         }
-        /*
+        
           public void MoveToCancelledAppointments()
          {
              var appointments = GetAppointmentLists();
@@ -103,9 +93,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                await client
-                    .Child($"Appointments/{key}")
-                    .DeleteAsync();
+                await client.Child($"Appointments/{key}").DeleteAsync();
                 return "Removed";
             }
             catch (Exception ex)
@@ -117,9 +105,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                await client
-                    .Child($"Pending Appointments/{key}")
-                    .DeleteAsync();
+                await client.Child($"Pending Appointments/{key}").DeleteAsync();
                 return "Removed";
             }
             catch (Exception ex)
@@ -131,10 +117,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                var getuserkey = (await client
-                    .Child("Appointments")
-                    .OnceAsync<Appointment>()).FirstOrDefault
-                    (a => a.Object.Email == mail);
+                var getuserkey = (await client.Child("Appointments").OnceAsync<Appointment>()).FirstOrDefault(a => a.Object.Email == mail);
                 if (getuserkey == null) return null;
                 date = getuserkey.Object.Date.Date;
                 fullname = getuserkey.Object.Fullname;
@@ -151,10 +134,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                var getuserkey = (await client
-                    .Child("Pending Appointments")
-                    .OnceAsync<Appointment>()).FirstOrDefault
-                    (a => a.Object.Email == mail);
+                var getuserkey = (await client.Child("Pending Appointments").OnceAsync<Appointment>()).FirstOrDefault(a => a.Object.Email == mail);
                 if (getuserkey == null) return null;
                 date = getuserkey.Object.Date;
                 fullname = getuserkey.Object.Fullname;

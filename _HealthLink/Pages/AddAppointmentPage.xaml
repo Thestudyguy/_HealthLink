@@ -22,10 +22,10 @@
                     <Entry x:Name="EmailEntry" />
 
                     <Label Text="Date" />
-                    <DatePicker x:Name="DateDatePicker" />
+                    <DatePicker x:Name="DateDatePicker" Format="MM/dd/yyyy"/>
 
                     <Label Text="Time" />
-                    <TimePicker x:Name="TimeTimePicker" />
+                    <TimePicker x:Name="TimeTimePicker" Format="h:mm tt" />
 
                     <Label Text="Department" />
                     <Entry x:Name="DepartmentEntry" />

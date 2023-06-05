@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="_HealthLink.MainPage"
              Shell.NavBarIsVisible="False" 
              BackgroundColor="White">
 
     <ScrollView>
         <StackLayout VerticalOptions="Center" Margin="50, 50, 50, 50" >
-            <Image Source="image.png" WidthRequest="300" HeightRequest="300"/>
+            <skia:SKLottieView Source="asd.json" WidthRequest="300" HeightRequest="320" VerticalOptions="Center" HorizontalOptions="Center" RepeatCount="-1"/>
             <Button Text="Appointments"
             TextColor="WhiteSmoke"
             BackgroundColor="{StaticResource HealthLink}"
