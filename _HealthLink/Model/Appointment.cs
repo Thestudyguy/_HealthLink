@@ -7,11 +7,12 @@ using static _HealthLink.App;
 using Firebase.Database.Query;
 using System.Collections.ObjectModel;
 using Firebase.Database;
+using LiteDB;
 
 
 namespace _HealthLink.Model
 {
-    internal class Appointment
+    internal class _Appointment
     {
         public DateTime Date { get; set; }
         public string Email { get; set; }
@@ -23,10 +24,10 @@ namespace _HealthLink.Model
         {
             try
             {
-                var evaluateEmail = (await client.Child("Appointments").OnceAsync<Appointment>()).FirstOrDefault(a => a.Object.Email == email);
+                var evaluateEmail = (await client.Child("Appointments").OnceAsync<_Appointment>()).FirstOrDefault(a => a.Object.Email == email);
                 if (evaluateEmail == null)
                 {
-                    var appointments = new Appointment()
+                    var appointments = new _Appointment()
                     {
                         Fullname = fullname,
                         Email = email,
@@ -53,14 +54,14 @@ namespace _HealthLink.Model
                 return false;
             }
         }
-        public ObservableCollection<Appointment> GetAppointmentLists()
+        public ObservableCollection<_Appointment> GetAppointmentLists()
         {
-            var appointmentLists = client.Child("Appointments").AsObservable<Appointment>().AsObservableCollection();
+            var appointmentLists = client.Child("Appointments").AsObservable<_Appointment>().AsObservableCollection();
             return appointmentLists;
         }
-        public ObservableCollection<Appointment> GetPendingAppointmentLists()
+        public ObservableCollection<_Appointment> GetPendingAppointmentLists()
         {
-            var PendingappointmentLists = client.Child("Pending Appointments").AsObservable<Appointment>().AsObservableCollection();
+            var PendingappointmentLists = client.Child("Pending Appointments").AsObservable<_Appointment>().AsObservableCollection();
             return PendingappointmentLists;
         }
      /*   public ObservableCollection<Appointment> GetCancelledAppointmentLists()
@@ -117,7 +118,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                var getuserkey = (await client.Child("Appointments").OnceAsync<Appointment>()).FirstOrDefault(a => a.Object.Email == mail);
+                var getuserkey = (await client.Child("Appointments").OnceAsync<_Appointment>()).FirstOrDefault(a => a.Object.Email == mail);
                 if (getuserkey == null) return null;
                 date = getuserkey.Object.Date.Date;
                 fullname = getuserkey.Object.Fullname;
@@ -134,7 +135,7 @@ namespace _HealthLink.Model
         {
             try
             {
-                var getuserkey = (await client.Child("Pending Appointments").OnceAsync<Appointment>()).FirstOrDefault(a => a.Object.Email == mail);
+                var getuserkey = (await client.Child("Pending Appointments").OnceAsync<_Appointment>()).FirstOrDefault(a => a.Object.Email == mail);
                 if (getuserkey == null) return null;
                 date = getuserkey.Object.Date;
                 fullname = getuserkey.Object.Fullname;
@@ -143,6 +144,57 @@ namespace _HealthLink.Model
                 return getuserkey?.Key;
             }
             catch (Exception e)
+            {
+                return null;
+            }
+        }
+        public async Task<List<_Appointment>> GetAllData()
+        {
+
+            return (await client
+                .Child("Appointments")
+                .OnceAsync<_Appointment>()).Select(item => new _Appointment
+                {
+                    Fullname = item.Object.Fullname,
+                    Email = item.Object.Email,
+                    Time = item.Object.Time,
+                    Date = item.Object.Date,
+                    Department = item.Object.Department
+
+                }).ToList();
+        }
+        public async Task<List<_Appointment>> FindAppointment(string fname)
+        {
+            try
+            {
+                var queryAppointments = await GetAllData();
+                await client
+                    .Child("Appointments")
+                    .OnceAsync<_Appointment>();
+                
+                return queryAppointments.Where(a => string.Equals(a.Fullname, fname, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<List<_Appointment>> FindPendingAppointment(string fname)
+        {
+            try
+            {
+                var queryAppointments = await GetAllData();
+                await client
+                    .Child("Pending Appointments")
+                    .OnceAsync<_Appointment>();
+
+                return queryAppointments.Where(a => string.Equals(a.Fullname, fname, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+
+            }
+            catch (Exception ex)
             {
                 return null;
             }

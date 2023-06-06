@@ -5,7 +5,7 @@ using System.Globalization;
 using static _HealthLink.App;
 public partial class AddAppointmentPage : ContentPage
 {
-    private Appointment _Appointment = new();
+    private _Appointment _appointment = new();
 	public AddAppointmentPage()
 	{
 		InitializeComponent();
@@ -21,7 +21,7 @@ public partial class AddAppointmentPage : ContentPage
         {
             var timeConverter = new TimeOnlyConverter();
             TimeOnly selectedTime = (TimeOnly)timeConverter.ConvertFromInvariantString(TimeTimePicker.Time.ToString());
-            var push = await _Appointment.AddAppointment(FullNameEntry.Text, EmailEntry.Text, DepartmentEntry.Text, DateDatePicker.Date, selectedTime);
+            var push = await _appointment.AddAppointment(FullNameEntry.Text, EmailEntry.Text, DepartmentEntry.Text, DateDatePicker.Date, selectedTime);
 
             if (push)
             {

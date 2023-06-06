@@ -22,7 +22,7 @@
 
                 <SearchBar Grid.Column="0" Placeholder="Search..." BackgroundColor="#03333f"
                    TextColor="WhiteSmoke" CancelButtonColor="WhiteSmoke"
-                   PlaceholderColor="{StaticResource TextSoft}"/>
+                   PlaceholderColor="{StaticResource TextSoft}" x:Name="searchEngine" SearchButtonPressed="searchEngine_SearchButtonPressed" TextChanged="searchEngine_TextChanged"/>
 
                 <Label Grid.Row="2" BackgroundColor="{StaticResource Primary}" x:Name="loader"
                HorizontalOptions="CenterAndExpand"/>

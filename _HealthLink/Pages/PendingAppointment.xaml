@@ -22,9 +22,9 @@
 
                 <SearchBar Grid.Column="0" Placeholder="Search..." BackgroundColor="#03333f"
                    TextColor="WhiteSmoke" CancelButtonColor="WhiteSmoke"
-                   PlaceholderColor="{StaticResource TextSoft}"/>
+                   PlaceholderColor="{StaticResource TextSoft}" x:Name="SearchEngine" TextChanged="SearchEngine_TextChanged"/>
 
-                <Label Grid.Row="2" BackgroundColor="{StaticResource Primary}" x:Name="loader"
+                <Label Grid.Row="2" BackgroundColor="{StaticResource Primary}"  x:Name="loader"
                HorizontalOptions="CenterAndExpand"/>
 
                 <CollectionView Grid.Row="3" x:Name="pendingAppointments" SelectionMode="Single" SelectionChanged="pendingAppointments_SelectionChanged">

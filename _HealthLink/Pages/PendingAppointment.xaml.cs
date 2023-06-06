@@ -1,10 +1,9 @@
 using _HealthLink.Model;
-
 namespace _HealthLink.Pages;
 
 public partial class PendingAppointment : ContentPage
 {
-    private Appointment apptLists = new();
+    private _Appointment apptLists = new();
 
     public PendingAppointment()
 	{
@@ -15,7 +14,7 @@ public partial class PendingAppointment : ContentPage
 
     private async void pendingAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        App.email = (e.CurrentSelection.FirstOrDefault() as Appointment)?.Email;
+        App.email = (e.CurrentSelection.FirstOrDefault() as _Appointment)?.Email;
         App.key = await apptLists.GetPendingAppointmentKey(App.email);
     }
 
@@ -25,6 +24,20 @@ public partial class PendingAppointment : ContentPage
         if (result)
         {
             await apptLists.DeletePendingAppointment();
+        }
+    }
+
+    private async void SearchEngine_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(SearchEngine.Text))
+        {
+            pendingAppointments.ItemsSource = apptLists.GetPendingAppointmentLists();
+            return;
+        }
+        else
+        {
+            pendingAppointments.ItemsSource = await apptLists.FindPendingAppointment(SearchEngine.Text);
+            return;
         }
     }
 }

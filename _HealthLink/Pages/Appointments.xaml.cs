@@ -3,7 +3,7 @@ using _HealthLink.Model;
 using static _HealthLink.App;
 public partial class AppointmentPage : ContentPage
 {
-    private Appointment apptLists = new();
+    private _Appointment apptLists = new();
 
     public AppointmentPage()
     {
@@ -13,7 +13,7 @@ public partial class AppointmentPage : ContentPage
 
     private async void appointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        App.email = (e.CurrentSelection.FirstOrDefault() as Appointment)?.Email;
+        App.email = (e.CurrentSelection.FirstOrDefault() as _Appointment)?.Email;
         App.key = await apptLists.GetAppointmentKey(App.email);
     }
 
@@ -29,5 +29,35 @@ public partial class AppointmentPage : ContentPage
     private async void add_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new AddAppointmentPage());
+    }
+    /*
+     
+     */
+    private async void searchEngine_SearchButtonPressed(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(searchEngine.Text))
+        {
+            appointments.ItemsSource = apptLists.GetAppointmentLists();
+            return;
+        }
+        else
+        {
+            appointments.ItemsSource = await apptLists.FindAppointment(searchEngine.Text);
+            return;
+        }
+    }
+
+    private async void searchEngine_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(searchEngine.Text))
+        {
+            appointments.ItemsSource = apptLists.GetAppointmentLists();
+            return;
+        }
+        else
+        {
+            appointments.ItemsSource = await apptLists.FindAppointment(searchEngine.Text);
+            return;
+        }
     }
 }
