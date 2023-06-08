@@ -54,6 +54,40 @@ namespace _HealthLink.Model
                 return false;
             }
         }
+        public async Task<bool> MovePendingAppointmentToApprovedAppointment(string fullname, string email, string department, DateTime date, TimeOnly time)
+        {
+            try
+            {
+                var evaluateEmail = (await client.Child("Appointments").OnceAsync<_Appointment>()).FirstOrDefault(a => a.Object.Email == email);
+                if (evaluateEmail == null)
+                {
+                    var appointments = new _Appointment()
+                    {
+                        Fullname = fullname,
+                        Email = email,
+                        Date = date,
+                        Time = time,
+                        Department = department
+                    };
+                    await client
+                        .Child("Appointments")
+                        .PostAsync(appointments);
+                    client.Dispose();
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
         public ObservableCollection<_Appointment> GetAppointmentLists()
         {
             var appointmentLists = client.Child("Appointments").AsObservable<_Appointment>().AsObservableCollection();

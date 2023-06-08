@@ -52,6 +52,7 @@
 	  <None Remove="Resources\Images\image.png" />
 	  <None Remove="Resources\Raw\animation.json" />
 	  <None Remove="Resources\Raw\asd.json" />
+	  <None Remove="Resources\Raw\move.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -65,6 +66,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Appointments.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MoveCreateDeleteAppointment.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\PendingAppointment.xaml">

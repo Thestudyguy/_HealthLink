@@ -1,4 +1,6 @@
 using _HealthLink.Model;
+using System.ComponentModel;
+
 namespace _HealthLink.Pages;
 
 public partial class PendingAppointment : ContentPage
@@ -39,5 +41,10 @@ public partial class PendingAppointment : ContentPage
             pendingAppointments.ItemsSource = await apptLists.FindPendingAppointment(SearchEngine.Text);
             return;
         }
+    }
+
+    private async void movePendingAppointment_Clicked(object sender, EventArgs e)
+    {
+       await Navigation.PushAsync(new MoveCreateDeleteAppointment());
     }
 }

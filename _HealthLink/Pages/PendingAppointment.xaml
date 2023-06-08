@@ -14,6 +14,10 @@
             x:Name="DeletePending"
             Clicked="DeletePending_Clicked"
                      Order="Secondary"/>
+        <ToolbarItem Text="Move To Appointments"
+                     x:Name="movePendingAppointment"
+                     Order="Secondary"
+                     Clicked="movePendingAppointment_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
@@ -49,7 +53,7 @@
                                                    TextColor="WhiteSmoke"
                                                    FontSize="Small" LineBreakMode="TailTruncation"
                                                    HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" />
-                                                <Label Margin="10" Grid.Row="0" Grid.Column="1" Text="{Binding Fullname}"
+                                                <Label x:Name="_fname" Margin="10" Grid.Row="0" Grid.Column="1" Text="{Binding Fullname}"
                                                    FontSize="Small"
                                                    FontAttributes="Bold" LineBreakMode="TailTruncation"
                                                    TextColor="WhiteSmoke" />
@@ -58,7 +62,7 @@
                                                    TextColor="WhiteSmoke"
                                                    FontSize="Small"
                                                    HorizontalOptions="Start" Grid.Row="1" Grid.Column="0" />
-                                                <Label Margin="10" Grid.Row="1" Grid.Column="1" Text="{Binding Email}"
+                                                <Label x:Name="_email" Margin="10" Grid.Row="1" Grid.Column="1" Text="{Binding Email}"
                                                    FontSize="Small"
                                                    FontAttributes="Bold" LineBreakMode="TailTruncation"
                                                    TextColor="WhiteSmoke" />
@@ -67,7 +71,7 @@
                                                    TextColor="WhiteSmoke"
                                                    FontSize="Small"
                                                    HorizontalOptions="Start" Grid.Row="2" Grid.Column="0" />
-                                                <Label Margin="10" Grid.Row="2" Grid.Column="1" Text="{Binding Date, StringFormat='{0:yyyy-MM-dd}'}"
+                                                <Label x:Name="_date" Margin="10" Grid.Row="2" Grid.Column="1" Text="{Binding Date, StringFormat='{0:yyyy-MM-dd}'}"
                                                    FontSize="Small"
                                                    FontAttributes="Bold" LineBreakMode="TailTruncation"
                                                    TextColor="WhiteSmoke" />
@@ -75,7 +79,7 @@
                                                    TextColor="WhiteSmoke"
                                                    FontSize="Small"
                                                    HorizontalOptions="Start" Grid.Row="3" Grid.Column="0" />
-                                                <Label Margin="10" Grid.Row="3" Grid.Column="1" Text="{Binding Time}"
+                                                <Label x:Name="_time" Margin="10" Grid.Row="3" Grid.Column="1" Text="{Binding Time}"
                                                    FontSize="Small"
                                                    FontAttributes="Bold" LineBreakMode="TailTruncation"
                                                    TextColor="WhiteSmoke" />
@@ -83,7 +87,7 @@
                                                    TextColor="WhiteSmoke"
                                                    FontSize="Small"
                                                    HorizontalOptions="Start" Grid.Row="4" Grid.Column="0" />
-                                                <Label Margin="10" Grid.Row="4" Grid.Column="1" Text="{Binding Department}"
+                                                <Label x:Name="_department" Margin="10" Grid.Row="4" Grid.Column="1" Text="{Binding Department}"
                                                    FontSize="Small"
                                                    FontAttributes="Bold" LineBreakMode="TailTruncation"
                                                    TextColor="WhiteSmoke" />

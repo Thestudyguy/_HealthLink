@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:Class="_HealthLink.Pages.MoveCreateDeleteAppointment"
+             Title="Move Appointments"
+             BackgroundColor="White"
+             Shell.BackgroundColor="#03333f"
+             Shell.ForegroundColor="WhiteSmoke"
+             Shell.TitleColor="WhiteSmoke">
+    <VerticalStackLayout>
+        <skia:SKLottieView Source="move.json" WidthRequest="300" HeightRequest="320" VerticalOptions="Center" HorizontalOptions="Center" RepeatCount="-1"/>
+
+
+        <StackLayout>
+            <Frame BackgroundColor="#03333f" Padding="10" CornerRadius="5">
+                <StackLayout>
+                    <Label Text="Full Name" />
+                    <Entry x:Name="_FullNameEntry" />
+
+                    <Label Text="Email" />
+                    <Entry x:Name="_EmailEntry" />
+
+                    <Label Text="Date" />
+                    <DatePicker x:Name="_DateDatePicker" Format="MM/dd/yyyy"/>
+
+                    <Label Text="Time" />
+                    <TimePicker x:Name="_TimeTimePicker" Format="h:mm tt" />
+
+                    <Label Text="Department(Optional)" />
+                    <Entry x:Name="_DepartmentEntry" />
+
+                    <Button Text="Move Appointment" x:Name="moveAppointment" Clicked="moveAppointment_Clicked" BackgroundColor="{StaticResource HealthLink}" TextColor="WhiteSmoke"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
