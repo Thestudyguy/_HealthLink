@@ -2,6 +2,7 @@ using _HealthLink.Model;
 using System.ComponentModel;
 namespace _HealthLink.Pages;
 using static _HealthLink.App;
+using System.Threading;
 
 public partial class MoveCreateDeleteAppointment : ContentPage
 {
@@ -40,8 +41,7 @@ public partial class MoveCreateDeleteAppointment : ContentPage
                 await DisplayAlert("Information", "Appointment Moved", "Ok");
                 await Navigation.PopAsync();
 
-                await Task.Delay(2000);
-
+               await Task.Delay(1000);
                await apptlists.DeletePendingAppointment();
             }
             else
