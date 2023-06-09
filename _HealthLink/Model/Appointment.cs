@@ -54,6 +54,41 @@ namespace _HealthLink.Model
                 return false;
             }
         }
+        public async Task<bool> EditData(string fullname, string email, string department, DateTime date, TimeOnly time)
+        {
+            try
+            {
+                var evaluateAppointment = (await client
+                    .Child("Appointments")
+                    .OnceAsync<_Appointment>()).FirstOrDefault
+                    (a => a.Object.Email == email);
+
+                if (evaluateAppointment != null)
+                {
+                    _Appointment appointment = new _Appointment
+                    {
+                        Fullname = fullname,
+                        Email = email,
+                        Department = department,
+                        Date = date,
+                        Time = time
+                    };
+                    await client
+                        .Child("Appointments")
+                        .Child(key)
+                        .PatchAsync(appointment);
+                    client.Dispose();
+                    return true;
+                }
+                client.Dispose();
+                return false;
+            }
+            catch (Exception e)
+            {
+                client.Dispose();
+                return false;
+            }
+        }
         public async Task<bool> MovePendingAppointmentToApprovedAppointment(string fullname, string email, string department, DateTime date, TimeOnly time)
         {
             try

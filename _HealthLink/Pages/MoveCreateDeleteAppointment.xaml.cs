@@ -18,7 +18,6 @@ public partial class MoveCreateDeleteAppointment : ContentPage
         _EmailEntry.Text = email;
         _DepartmentEntry.Text = department;
         _DateDatePicker.Date = date;
-        _TimeTimePicker = time;
     }
 
 
@@ -26,23 +25,29 @@ public partial class MoveCreateDeleteAppointment : ContentPage
     private async void moveAppointment_Clicked(object sender, EventArgs e)
     {
 
-        var timeConverter = new TimeOnlyConverter();
-        TimeOnly selectedTime = (TimeOnly)timeConverter.ConvertFromInvariantString(_TimeTimePicker.Time.ToString());
-        var push = await apptlists.AddAppointment(_FullNameEntry.Text, _EmailEntry.Text, _DepartmentEntry.Text, _DateDatePicker.Date, selectedTime);
+        if (!string.IsNullOrEmpty(_FullNameEntry.Text) ||
+             !string.IsNullOrEmpty(_EmailEntry.Text) ||
+             !string.IsNullOrEmpty(_DepartmentEntry.Text) ||
+             _DateDatePicker.Date >= DateTime.Today.Date ||
+             _TimeTimePicker.Time >= DateTime.Now.TimeOfDay)
+        {
+            var timeConverter = new TimeOnlyConverter();
+            TimeOnly selectedTime = (TimeOnly)timeConverter.ConvertFromInvariantString(_TimeTimePicker.Time.ToString());
+            var push = await apptlists.AddAppointment(_FullNameEntry.Text, _EmailEntry.Text, _DepartmentEntry.Text, _DateDatePicker.Date, selectedTime);
 
-        if (push)
+            if (push)
             {
                 await DisplayAlert("Information", "Appointment Moved", "Ok");
                 await Navigation.PopAsync();
-                
-                await Task.Delay(500);
-                
-            await apptlists.DeleteAppointment();
 
-        }
-        else
+                await Task.Delay(2000);
+
+               await apptlists.DeletePendingAppointment();
+            }
+            else
             {
                 await DisplayAlert("Information", "Something is wrong", "Ok");
             }
+        }
     }
 }
