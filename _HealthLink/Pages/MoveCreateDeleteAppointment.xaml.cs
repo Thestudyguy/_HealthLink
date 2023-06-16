@@ -35,7 +35,9 @@ public partial class MoveCreateDeleteAppointment : ContentPage
             var timeConverter = new TimeOnlyConverter();
             TimeOnly selectedTime = (TimeOnly)timeConverter.ConvertFromInvariantString(_TimeTimePicker.Time.ToString());
             var push = await apptlists.AddAppointment(_FullNameEntry.Text, _EmailEntry.Text, _DepartmentEntry.Text, _DateDatePicker.Date, selectedTime);
-
+             
+            try
+            {
             if (push)
             {
                 await DisplayAlert("Information", "Appointment Moved", "Ok");
@@ -48,6 +50,12 @@ public partial class MoveCreateDeleteAppointment : ContentPage
             {
                 await DisplayAlert("Information", "Something is wrong", "Ok");
             }
+            }catch(Exception) 
+            {
+                await DisplayAlert("", "Same Time and Date, re-select Time and Date", "OK");
+            }
+
+           
         }
     }
 }

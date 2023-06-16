@@ -28,7 +28,7 @@
                     <TimePicker x:Name="_TimeTimePicker" Format="h:mm tt" />
 
                     <Label Text="Department(Optional)" />
-                    <Entry x:Name="_DepartmentEntry" />
+                    <Entry x:Name="_DepartmentEntry"/>
 
                     <Button Text="Move Appointment" x:Name="moveAppointment" Clicked="moveAppointment_Clicked" BackgroundColor="{StaticResource HealthLink}" TextColor="WhiteSmoke"/>
                 </StackLayout>

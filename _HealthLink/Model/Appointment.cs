@@ -20,14 +20,22 @@ namespace _HealthLink.Model
         public TimeOnly Time { get; set; }
         public string Department { get; set; }
 
+
         public async Task<bool> AddAppointment(string fullname, string email, string department, DateTime date, TimeOnly time)
         {
             try
             {
-                var evaluateEmail = (await client.Child("Appointments").OnceAsync<_Appointment>()).FirstOrDefault(a => a.Object.Email == email);
-                if (evaluateEmail == null)
+                var appointments = await client.Child("Appointments").OnceAsync<_Appointment>();
+
+                var duplicateAppointment = appointments.FirstOrDefault(appointment =>
+                    appointment.Object.Email == email ||
+                    appointment.Object.Time == time ||
+                    appointment.Object.Date == date
+                );
+
+                if (duplicateAppointment == null)
                 {
-                    var appointments = new _Appointment()
+                    var newAppointment = new _Appointment()
                     {
                         Fullname = fullname,
                         Email = email,
@@ -35,60 +43,21 @@ namespace _HealthLink.Model
                         Time = time,
                         Department = department
                     };
-                    await client
-                        .Child("Appointments")
-                        .PostAsync(appointments);
-                    client.Dispose();
-                    return true;
 
+                    await client.Child("Appointments").PostAsync(newAppointment);
+                    return true;
                 }
                 else
                 {
                     return false;
                 }
-
             }
             catch
             {
-
                 return false;
             }
         }
-        public async Task<bool> EditData(string fullname, string email, string department, DateTime date, TimeOnly time)
-        {
-            try
-            {
-                var evaluateAppointment = (await client
-                    .Child("Appointments")
-                    .OnceAsync<_Appointment>()).FirstOrDefault
-                    (a => a.Object.Email == email);
 
-                if (evaluateAppointment != null)
-                {
-                    _Appointment appointment = new _Appointment
-                    {
-                        Fullname = fullname,
-                        Email = email,
-                        Department = department,
-                        Date = date,
-                        Time = time
-                    };
-                    await client
-                        .Child("Appointments")
-                        .Child(key)
-                        .PatchAsync(appointment);
-                    client.Dispose();
-                    return true;
-                }
-                client.Dispose();
-                return false;
-            }
-            catch (Exception e)
-            {
-                client.Dispose();
-                return false;
-            }
-        }
         public async Task<bool> MovePendingAppointmentToApprovedAppointment(string fullname, string email, string department, DateTime date, TimeOnly time)
         {
             try
