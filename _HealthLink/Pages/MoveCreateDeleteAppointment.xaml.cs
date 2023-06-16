@@ -48,11 +48,11 @@ public partial class MoveCreateDeleteAppointment : ContentPage
             }
             else
             {
-                await DisplayAlert("Information", "Something is wrong", "Ok");
+                await DisplayAlert("Information", "Same Time and Date, re-select Time and Date", "Ok");
             }
             }catch(Exception) 
             {
-                await DisplayAlert("", "Same Time and Date, re-select Time and Date", "OK");
+                await DisplayAlert("Warning", "Something is wrong", "OK");
             }
 
            
